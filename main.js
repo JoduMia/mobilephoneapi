@@ -93,16 +93,25 @@
 const input = document.getElementById('input');
 const container = document.getElementById('phone-container');
 const show = document.getElementById('show');
-const main = () => {
+// search handler with btn key;
     document.getElementById('btn-search').addEventListener('click', function () {
         loader();
         fetcher();
     })
-};
+
+
+// search wtih enter button press
+input.addEventListener('keydown', (event) => {
+    if(event.key === 'Enter'){
+        loader();
+        fetcher();
+    }
+})
+
+
 
 
 //----------------
-
 const displayData = (results, isLimited) => {
     container.classList.add('row-cols-md-4')
     container.innerHTML = '';
@@ -172,5 +181,3 @@ const fetcher = (show) => {
         }
     })
 };
-
-main();
