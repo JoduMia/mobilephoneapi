@@ -93,6 +93,7 @@
 const input = document.getElementById('input');
 const container = document.getElementById('phone-container');
 const show = document.getElementById('show');
+const showModal = document.getElementById('showModal');
 // search handler with btn key;
     document.getElementById('btn-search').addEventListener('click', function () {
         loader();
@@ -153,6 +154,7 @@ const commonDisplay = (results) =>{
             <div class="card-body">
                 <h5 class="card-title">${phone.phone_name} </h5>
                 <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <button type="button" onclick="loadDetails('${phone.slug}')" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Details</button>
             </div>
         </div>`;
         container.appendChild(div);
@@ -180,4 +182,21 @@ const fetcher = (show) => {
             displayData(results,true);
         }
     })
+};
+
+
+//load detail on detail button click
+const loadDetails = async id => {
+    const res = await fetch(`https://openapi.programming-hero.com/api/phone/${id}`);
+    const result = await res.json();
+    displayPhoneDetail(result.data);
+};
+
+//display phonedeatail function------
+const displayPhoneDetail = phone => {
+    console.log(phone);
+    const title = document.getElementById('modalTitle');
+    const img = document.getElementById('img');
+    title.innerText = `${phone.name}`;
+    img.setAttribute('src', `${phone.image}`)
 };
