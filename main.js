@@ -95,15 +95,15 @@ const container = document.getElementById('phone-container');
 const show = document.getElementById('show');
 const showModal = document.getElementById('showModal');
 // search handler with btn key;
-    document.getElementById('btn-search').addEventListener('click', function () {
-        loader();
-        fetcher();
-    })
+document.getElementById('btn-search').addEventListener('click', function () {
+    loader();
+    fetcher();
+})
 
 
 // search wtih enter button press
 input.addEventListener('keydown', (event) => {
-    if(event.key === 'Enter'){
+    if (event.key === 'Enter') {
         loader();
         fetcher();
     }
@@ -117,8 +117,8 @@ const displayData = (results, isLimited) => {
     container.classList.add('row-cols-md-4')
     container.innerHTML = '';
 
-    if(isLimited && results.length>12){
-        results = results.slice(0,12);
+    if (isLimited && results.length > 12) {
+        results = results.slice(0, 12);
         commonDisplay(results);
         show.classList.remove('d-none');
     } else {
@@ -140,8 +140,8 @@ const loader = () => {
 
 //common displaydata func ------------
 
-const commonDisplay = (results) =>{
-    if(results.length === 0) {
+const commonDisplay = (results) => {
+    if (results.length === 0) {
         container.classList.remove('row-cols-md-4');
         container.innerHTML = `<h3 class="text-danger text-center">Oops! No data had found. Try again search.</h3>`;
     }
@@ -163,7 +163,7 @@ const commonDisplay = (results) =>{
 
 //show-all button handleer
 
-show.addEventListener('click', function(){
+show.addEventListener('click', function () {
     fetcher(true);
     this.classList.add('d-none');
 })
@@ -173,15 +173,15 @@ show.addEventListener('click', function(){
 const fetcher = (show) => {
     const searchText = input.value;
     fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText}`)
-    .then(res => res.json())
-    .then(result => {
-        const results = result.data;
-        if(show){
-            displayData(results);
-        } else {
-            displayData(results,true);
-        }
-    })
+        .then(res => res.json())
+        .then(result => {
+            const results = result.data;
+            if (show) {
+                displayData(results);
+            } else {
+                displayData(results, true);
+            }
+        })
 };
 
 
